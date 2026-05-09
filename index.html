@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>proyecto 1</title>
+
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #c9a4a0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden; 
+        }
+
+        #contenedor-anime {
+            margin-bottom: 20px;
+        }
+
+        #img-anime {
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(260, 260, 260, 0.3);
+            transition: all 0.3s ease;
+        }
+        .botones {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            position: relative;
+            min-height: 50px;
+        }
+
+        button {
+            padding: 10px 25px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+            transition: all 0.2s ease;
+        }
+
+        #btnSi {
+            background-color: #05ed1d;
+            color: white;
+            z-index: 100; 
+        }
+
+        #btnNo {
+            background-color: #ff0202;
+            color: white;
+            position: fixed; 
+        }
+    </style>
+</head>
+<body>
+
+    <div id="contenedor-anime">
+    <img id="img-anime" src="feliz.jpg" alt="Anime">
+</div>
+
+    <h1>¿puede contratarme?</h1>
+
+    <div class="botones">
+        <button id="btnSi">SÍ</button>
+        <button id="btnNo">NO</button>
+    </div>
+
+    <script>
+        const btnSi = document.getElementById('btnSi');
+        const btnNo = document.getElementById('btnNo');
+        const imgAnime = document.getElementById('img-anime');
+
+        let padingSi = 10;
+        let fontSizeSi = 16;
+
+       const reacciones = [
+    "triste.jpg", 
+    "tristee.jpg",   
+   "tristeeee.jpg",  
+    "enojada.jpg", 
+    "enojadaa.jpg",
+    "enojadaaa.jpg",
+];
+        let nivelReaccion = 0;
+
+        btnNo.addEventListener('mouseover', () => {
+            const x = Math.random() * (window.innerWidth - btnNo.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btnNo.offsetHeight);
+            
+            btnNo.style.left = `${x}px`;
+            btnNo.style.top = `${y}px`;
+
+            padingSi += 15;
+            fontSizeSi += 8;
+            btnSi.style.padding = `${padingSi}px ${padingSi * 2}px`;
+            btnSi.style.fontSize = `${fontSizeSi}px`;
+
+            if (nivelReaccion < reacciones.length) {
+                imgAnime.src = reacciones[nivelReaccion];
+                nivelReaccion++;
+            }
+        });
+
+     btnSi.addEventListener('click', () => {
+       imgAnime.src = "feliz.jpg";
+    alert('gracias me voy a esforzar mucho :D');
+    confetti({
+    particleCount: 100,
+     spread: 70,
+     origin: { y: 0.5 }
+  }); 
+}); 
+    </script>
+
+</body>
+</html>
